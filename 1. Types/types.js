@@ -12,3 +12,10 @@
   9. Function
   10. Array
 */
+
+const foo = 1;
+let bar = foo;
+
+bar = 2;
+console.log(foo, bar);
+// Output: 1 2

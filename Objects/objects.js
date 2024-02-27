@@ -131,3 +131,50 @@ const good = {
 }
 
 
+/*
+3.7 Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable and isPrototypeOf.
+eslint:
+  eslint no-prototype-builtins: "error"
+  https://eslint.org/docs/latest/rules/no-prototype-builtins
+*/
+
+// bad
+console.log(object.hasOwnProperty(key));
+
+// good
+console.log(Object.prototype.hasOwnProperty.call(object, key));
+
+// better
+const has = Object.prototype.hasOwnProperty; // cache the lookup once, in module scope.
+console.log(has.call(object, key));
+
+// best
+console.log(Object.hasOwn(object, key)); // only supported in browsers that support ES2022
+
+/* or */
+import has from 'has'; // https://www.npmjs.com/package/has
+console.log(has(object, key));
+/* or */
+console.log(Object.hasOwn(object, key)); // https://www.npmjs.com/package/object.hasown
+
+/*
+3.8 Prefer the object spread syntax over object.assign to shallow-copy objects. Use the object rest parameter to get a new object with certain properties excluded.
+eslint:
+  eslint prefer-object-spread: "error"
+  https://eslint.org/docs/latest/rules/prefer-object-spread
+*/
+
+// very bad
+const original = { a: 1, b: 2 };
+const copy = Object.assign(original, {c: 3});
+delete copy.a;
+console.log(original);
+
+// bad
+const original1 = { a: 1, b: 2 };
+const copy1 = Object.assign({}, original1, {c: 3});
+
+// good
+const original2 = { a: 1, b: 2 };
+const copy2 = {...original2, c: 3};
+const { a, ...noA } = copy2;

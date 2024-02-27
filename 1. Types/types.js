@@ -19,3 +19,7 @@ let bar = foo;
 bar = 2;
 console.log(foo, bar);
 // Output: 1 2
+
+/*  @N/B
+Symbols and BigInts cannot be faithfully polyfilled, so they should not be used when targeting browsers/environments that don’t support them natively.
+*/

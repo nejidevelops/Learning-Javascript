@@ -10,8 +10,8 @@ let hours = today.getHours();
 let minutes = today.getMinutes();
 let seconds = today.getSeconds();
 
-let formattedHours = hours > 12 ?  `${hours} PM` : `${hours} AM`;
+let formattedHours = hours > 12 ?  `${hours}: ${minutes} : ${seconds} PM` : `${hours}: ${minutes} : ${seconds} AM`;
 
 
 console.log(`Today is: ${day}`);
-console.log(`Current time is: ${formattedHours} : ${minutes} : ${seconds}`);
+console.log(`Current time is: ${formattedHours}`);
